@@ -1,0 +1,19 @@
+{
+  "name": "defi-portfolio-dashboard",
+  "private": true,
+  "scripts": {
+    "lint": "eslint \"web/src/**/*.{js,ts,jsx,tsx}\"",
+    "format": "prettier --write \"web/src/**/*.{js,ts,jsx,tsx,json,css,md}\"",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0"
+  },
+  "lint-staged": {
+    "web/src/**/*.{ts,tsx,js,jsx,json,css,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
