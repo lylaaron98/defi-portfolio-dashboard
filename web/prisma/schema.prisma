@@ -1,0 +1,59 @@
+// prisma/schema.prisma
+// Initial Prisma schema for PostgreSQL
+// Models: User, Wallet, PortfolioSnapshot, Transaction, WatchlistItem
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  wallets   Wallet[]
+  watchlist WatchlistItem[]
+  createdAt DateTime @default(now())
+}
+
+model Wallet {
+  id        String   @id @default(uuid())
+  address   String   @unique
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  snapshots PortfolioSnapshot[]
+  transactions Transaction[]
+  createdAt  DateTime @default(now())
+}
+
+model PortfolioSnapshot {
+  id        String   @id @default(uuid())
+  wallet    Wallet  @relation(fields: [walletId], references: [id])
+  walletId  String
+  totalValueUsd String
+  balances  Json
+  createdAt DateTime @default(now())
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  wallet    Wallet  @relation(fields: [walletId], references: [id])
+  walletId  String
+  txHash    String   @unique
+  token     String
+  value     String
+  status    String
+  timestamp DateTime
+  createdAt DateTime @default(now())
+}
+
+model WatchlistItem {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  symbol    String
+  createdAt DateTime @default(now())
+}

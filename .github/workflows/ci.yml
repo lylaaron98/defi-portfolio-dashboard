@@ -1,0 +1,61 @@
+# .github/workflows/ci.yml
+# Production-friendly CI for Next.js Web3 dashboard
+# Ensures code quality, type safety, and test coverage on every PR and push to main
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test:unit
+
+  # Playwright E2E can be enabled later for full browser coverage
+  # e2e:
+  #   needs: build-and-test
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./web
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: 'npm'
+  #     - run: npm ci
+  #     - run: npx playwright install --with-deps
+  #     - run: npm run test:e2e:ci
+
+# Comments:
+# - This workflow enforces code quality and reliability before merging or deploying.
+# - Lint/typecheck/tests catch bugs early, keeping main stable.
+# - E2E can be enabled for full-stack confidence.

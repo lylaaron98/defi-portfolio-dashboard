@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import "@mantine/core/styles.css";
 import "./globals.css";
+import { MantineProvider } from "@mantine/core";
+import { QueryProvider } from "@/lib/query/QueryProvider";
+import { WalletProvider } from "@/features/wallet/components/WalletProvider";
+import { appTheme } from "@/lib/theme/mantine-theme";
 
 // Root metadata placeholder for SEO, i18n, and theming
 export const metadata: Metadata = {
@@ -17,14 +22,20 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* App-wide font setup: Inter via Google Fonts */}
+        {/* App-wide font setup for the trading dashboard theme */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      <body className="font-sans bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen">
-        {/* Theme-ready body: add theme provider for dark/light mode in the future */}
-        {children}
+      <body className="app-body" suppressHydrationWarning>
+        <MantineProvider defaultColorScheme="dark" forceColorScheme="dark" theme={appTheme}>
+          <QueryProvider>
+            <WalletProvider>{children}</WalletProvider>
+          </QueryProvider>
+        </MantineProvider>
       </body>
     </html>
   );
