@@ -1,7 +1,7 @@
+import { redirect } from "next/navigation";
+
+import { ROUTES } from "@/lib/constants/routes";
+
 export default function Home() {
-  return (
-    <main>
-      <div>Hello world!</div>
-    </main>
-  );
+  redirect(ROUTES.DASHBOARD);
 }
