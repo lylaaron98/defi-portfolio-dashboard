@@ -43,8 +43,8 @@ import {
   IconWallet,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { type ReactNode, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { type ReactNode } from "react";
 
 const primaryNav = [
   { label: "Markets", href: ROUTES.MARKETS, icon: IconChartArcs, count: 5 },
@@ -103,13 +103,7 @@ function WalletIdentity() {
 
 export function DashboardShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
-
-  // Pre-warm all primary routes so navigation is instant
-  useEffect(() => {
-    primaryNav.forEach((item) => router.prefetch(item.href));
-  }, [router]);
 
   return (
     <AppShell
@@ -167,7 +161,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
                     component={Link}
                     fw={600}
                     href={item.href}
-                    prefetch={true}
+                    prefetch={false}
                     key={`${item.label}-${item.href}`}
                     label={item.label}
                     leftSection={<Icon size={20} stroke={1.5} />}
