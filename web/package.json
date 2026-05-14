@@ -10,7 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test:unit": "vitest run",
-    "prepare": "husky install",
+    "prepare": "if [ -z \"$CI\" ]; then husky install; fi",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ci": "playwright install --with-deps && playwright test --reporter=dot"
