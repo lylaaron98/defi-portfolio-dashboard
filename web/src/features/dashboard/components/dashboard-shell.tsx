@@ -29,16 +29,11 @@ import {
   IconChartArcs,
   IconChartBar,
   IconChevronRight,
-  IconCreditCard,
   IconDroplets,
-  IconFileDescription,
-  IconHelp,
   IconLayoutGrid,
-  IconListSearch,
   IconMail,
   IconReceipt2,
   IconSearch,
-  IconSettings,
   IconShoppingCart,
   IconWallet,
 } from "@tabler/icons-react";
@@ -55,14 +50,6 @@ const primaryNav = [
   { label: "Portfolio", href: ROUTES.PORTFOLIO, icon: IconChartBar, count: 7 },
   { label: "Liquidity Pools", href: ROUTES.LIQUIDITY_POOLS, icon: IconDroplets, count: 2 },
   { label: "Swap", href: ROUTES.SWAP, icon: IconReceipt2, count: 1 },
-];
-
-const utilityNav = [
-  { label: "Tables", href: ROUTES.DASHBOARD, icon: IconListSearch },
-  { label: "Charts", href: ROUTES.DASHBOARD, icon: IconChartBar },
-  { label: "Forms", href: ROUTES.DASHBOARD, icon: IconFileDescription },
-  { label: "Settings", href: ROUTES.SETTINGS, icon: IconSettings },
-  { label: "Support", href: ROUTES.DASHBOARD, icon: IconHelp },
 ];
 
 function WalletIdentity() {

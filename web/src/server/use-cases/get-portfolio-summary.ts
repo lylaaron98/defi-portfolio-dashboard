@@ -13,7 +13,7 @@ export async function getPortfolioSummaryUseCase(
       return { error: "Portfolio not found" };
     }
     return { data: summary };
-  } catch (e) {
+  } catch {
     return { error: "Internal server error" };
   }
 }

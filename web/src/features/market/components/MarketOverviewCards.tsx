@@ -2,6 +2,7 @@
 "use client";
 import { MarketTicker } from "../types/marketTicker";
 import { Card } from "@/components/ui/Card";
+import Image from "next/image";
 
 interface Props {
   tickers: MarketTicker[];
@@ -15,7 +16,9 @@ export function MarketOverviewCards({ tickers }: Props) {
       <Card>
         <div className="text-lg font-semibold">Top Token</div>
         <div className="flex items-center gap-2 mt-2">
-          {top.logoUrl && <img src={top.logoUrl} alt={top.symbol} className="w-8 h-8" />}
+          {top.logoUrl ? (
+            <Image alt={top.symbol} className="w-8 h-8" height={32} src={top.logoUrl} width={32} />
+          ) : null}
           <span>
             {top.name} ({top.symbol})
           </span>

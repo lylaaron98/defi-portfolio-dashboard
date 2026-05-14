@@ -2,6 +2,7 @@
 "use client";
 import { MarketTicker } from "../types/marketTicker";
 import { Skeleton } from "@/components/ui/Skeleton";
+import Image from "next/image";
 
 interface Props {
   tickers: MarketTicker[];
@@ -35,7 +36,15 @@ export function TokenPriceList({ tickers, isLoading, isError }: Props) {
           {tickers.map((t) => (
             <tr key={t.symbol}>
               <td className="flex items-center gap-2 py-2">
-                {t.logoUrl && <img src={t.logoUrl} alt={t.symbol} className="w-5 h-5" />}
+                {t.logoUrl ? (
+                  <Image
+                    alt={t.symbol}
+                    className="w-5 h-5"
+                    height={20}
+                    src={t.logoUrl}
+                    width={20}
+                  />
+                ) : null}
                 <span>
                   {t.name} ({t.symbol})
                 </span>

@@ -12,7 +12,8 @@ const MOCK_PORTFOLIO: PortfolioSummary = {
   updatedAt: Date.now(),
 };
 
-export async function fetchPortfolio(address: string): Promise<PortfolioSummary> {
+export async function fetchPortfolio(_address: string): Promise<PortfolioSummary> {
+  void _address;
   // Simulate network delay
   await new Promise((r) => setTimeout(r, 800));
   // In production, fetch from API/DB here

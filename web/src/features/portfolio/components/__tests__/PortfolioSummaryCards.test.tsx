@@ -9,20 +9,30 @@ describe("PortfolioSummaryCards", () => {
     renderWithProviders(
       <PortfolioSummaryCards
         summary={{
-          totalValue: 1000,
-          tokens: [],
-          allocation: [],
+          address: "0x1234",
+          totalValueUsd: "1000",
+          balances: [],
+          updatedAt: Date.now(),
         }}
       />,
     );
+
     expect(screen.getByText(/total value/i)).toBeInTheDocument();
-    expect(screen.getByText("$1,000")).toBeInTheDocument();
+    expect(screen.getByText("$1000")).toBeInTheDocument();
   });
 
   it("handles empty summary", () => {
     renderWithProviders(
-      <PortfolioSummaryCards summary={{ totalValue: 0, tokens: [], allocation: [] }} />,
+      <PortfolioSummaryCards
+        summary={{
+          address: "0x1234",
+          totalValueUsd: "0",
+          balances: [],
+          updatedAt: Date.now(),
+        }}
+      />,
     );
+
     expect(screen.getByText("$0")).toBeInTheDocument();
   });
 });

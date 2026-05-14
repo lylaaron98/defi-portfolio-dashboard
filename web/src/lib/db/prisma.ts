@@ -1,8 +1,32 @@
 // src/lib/db/prisma.ts
 // Prisma client singleton for server usage
-import { PrismaClient } from "@prisma/client";
+import type { PortfolioSummary } from "@/features/portfolio/types";
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefined };
+type SnapshotRecord = {
+  totalValueUsd: string;
+  balances: PortfolioSummary["balances"];
+  createdAt: Date;
+};
+
+type WalletRecord = {
+  address: string;
+  snapshots: SnapshotRecord[];
+};
+
+type PrismaLike = {
+  wallet: {
+    findUnique: (args: unknown) => Promise<WalletRecord | null>;
+  };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { PrismaClient } = require("@prisma/client") as {
+  PrismaClient: new (options?: { log?: string[] }) => PrismaLike;
+};
+
+type PrismaClientInstance = InstanceType<typeof PrismaClient>;
+
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClientInstance | undefined };
 
 export const prisma =
   globalForPrisma.prisma ??

@@ -1,6 +1,5 @@
 // src/lib/api/http-client.ts
 import { fetchJson } from "./fetch-json";
-import { AppError } from "./handle-api-error";
 
 /**
  * HttpClient: Extensible API client for internal/external requests.

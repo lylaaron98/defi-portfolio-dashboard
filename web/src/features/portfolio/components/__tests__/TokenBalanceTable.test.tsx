@@ -9,22 +9,31 @@ describe("TokenBalanceTable", () => {
     renderWithProviders(
       <TokenBalanceTable
         summary={{
-          totalValue: 1000,
-          tokens: [{ symbol: "ETH", name: "Ethereum", balance: 2, price: 500, value: 1000 }],
-          allocation: [],
+          address: "0x1234",
+          totalValueUsd: "1000",
+          balances: [{ token: "ETH", amount: "2", address: "0xabc...1234" }],
+          updatedAt: Date.now(),
         }}
       />,
     );
+
     expect(screen.getByText("ETH")).toBeInTheDocument();
-    expect(screen.getByText("Ethereum")).toBeInTheDocument();
     expect(screen.getByText("2")).toBeInTheDocument();
-    expect(screen.getByText("$500")).toBeInTheDocument();
+    expect(screen.getByText("0xabc...1234")).toBeInTheDocument();
   });
 
   it("shows empty state", () => {
     renderWithProviders(
-      <TokenBalanceTable summary={{ totalValue: 0, tokens: [], allocation: [] }} />,
+      <TokenBalanceTable
+        summary={{
+          address: "0x1234",
+          totalValueUsd: "0",
+          balances: [],
+          updatedAt: Date.now(),
+        }}
+      />,
     );
+
     expect(screen.getByText(/no tokens/i)).toBeInTheDocument();
   });
 });

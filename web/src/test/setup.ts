@@ -1,6 +1,6 @@
 // src/test/setup.ts
 import "@testing-library/jest-dom";
-import { afterEach, expect } from "vitest";
+import { afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 
 // Clean up after each test

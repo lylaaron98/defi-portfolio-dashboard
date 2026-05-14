@@ -1,6 +1,6 @@
 // src/components/shared/layout/DashboardSidebar.tsx
 // Modular, responsive sidebar for dashboard navigation
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DASHBOARD_NAV } from "@/lib/constants/navigation";
